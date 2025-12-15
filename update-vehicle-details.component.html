@@ -1,0 +1,448 @@
+<div class="container">
+    <form [formGroup]="assetinfromationformgroup" >
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-label required-field">vehicle no</label>
+                    <!-- <input type="text" name="" id="" class="form-control"> -->
+                    <ng-select [items]="vehicleList" id="documentsType" formControlName="pinvoice_number"
+                        bindLabel="pinvoiceno" bindValue="pinvoiceno" [multiple]=false placeholder="Select"
+                        [searchable]=true [clearable]=false dropdownPosition="bottom" (change)="selectvehicleno($event)"
+                        [clearOnBackspace]=true>
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="dateOfMV" title="MV Date">MV Date</label>
+                    <input type="text" class="form-control" formControlName="ptransaction_date"
+                        placeholder="Date picker here" [bsConfig]="dpConfig6" #dp="bsDatepicker" bsDatepicker
+                        placement="bottom">
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="pinvoice_date" title="Date Of Invoice">Date Of Invoice</label>
+                    <input type="text" class="form-control" formControlName="pinvoice_date"
+                        placeholder="Date picker here" readonly [bsConfig]="dpConfig4" #dp="bsDatepicker" bsDatepicker
+                        placement="bottom">
+                    <!--  (ngModelChange)="ChequeDateChangeFromDate($event)" -->
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="invoiceNo" title="Invoice No.">Invoice No.</label>
+                    <input type="text" class="form-control" formControlName="pinvoice_number" id="invoiceNo"
+                        name="invoiceNo">
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="vendorName" title="Vendor Name">Vendor Name</label>
+                    <input type="text" class="form-control" formControlName="pvendor_name" name="vendorName"
+                        id="vendorName">
+
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="custodyAt" title="Custody At">Custody At</label>
+                    <input type="text" class="form-control" formControlName="pcustodyat">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+
+        <div class="row">
+            <div class="col-md-3 ">
+                <div class="form-group">
+                    <label id="nameOfTheAsset" title="Name Of The Asset">Name Of The
+                        Asset</label>
+                    <input type="text" class="form-control" formControlName="passet_name" name="nameOfTheAsset"
+                        id="nameOfTheAsset">
+                </div>
+            </div>
+            <div class="col-md-3 ">
+                <div class="form-group">
+                    <label id="brandOfTheAsset" title="Name Of The Asset">Brand/Series of the
+                        Asset</label>
+                    <input type="text" class="form-control" formControlName="passet_brand" name="brandOfTheAsset"
+                        id="brandOfTheAsset">
+                </div>
+            </div>
+
+
+            <div class="col-md-3 ">
+                <div class="form-group">
+                    <label id="quantity" title="Quantity">Quantity</label>
+
+                    <input type="text" class="form-control" formControlName="pquantity" name="quantity" id="quantity"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()" appNumbersonly
+                        appMycurrencyFormatter>
+                    <!-- <input type="text" class="form-control text-right " formControlName="pquantity"  id="quantity" > -->
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="rate" title="Rate">Rate</label>
+                    <span class="badge-success badge p-1 font-weight-strong ml-2">Total Cost - {{calc |
+                        currencypipe}} (Without Tax) </span>
+                    <input type="text" class="form-control" formControlName="prate" name="rate" id="rate"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appMycurrencyFormatter appRoundecimal="12@2">
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="Freight" title="Freight">Freight</label>
+                    <input type="text" class="form-control" formControlName="pfreight" name="Freight" id="Freight"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appMycurrencyFormatter appNumbersonly>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xl-3">
+                <div class="form-group">
+                    <label id="InstallationCost" title="Installation Cost">Installation Cost</label>
+                    <input type="text" class="form-control" formControlName="pinstallationcost" appMycurrencyFormatter
+                        appNumbersonly name="InstallationCost" id="InstallationCost" style="text-align:right;"
+                        (blur)="totalCalculation()" (blur)="grandTotalBGrid1()">
+
+
+                </div>
+            </div>
+
+
+            <!-- <div class="col-md-3 ">
+                <div class="form-group">
+                    <label id="custodyAt" title="Custody At">Custody At</label>
+                    <input type="text" class="form-control" formControlName="custodyAt" name="custodyAt" id="custodyAt">
+                </div>
+            </div> -->
+        </div>
+
+        <div class="row">
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label title="CGST"><span>CGST %</span>
+                        <span class="badge-success badge p-1 font-weight-strong"
+                            *ngIf="assetinfromationformgroup.controls.pcgst_percentage.value !=''">CGST Amount -
+                            {{cgstPercentage | currencypipe}} </span></label>
+                    <input type="text" class="form-control" formControlName="pcgst_percentage" name="cgst" id="cgst"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appRoundecimal="2@2">
+
+
+                </div>
+            </div>
+
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label title="SGST">SGST % <span class="badge-success badge p-1 font-weight-strong ml-2"
+                            *ngIf="assetinfromationformgroup.controls.psgst_percentage.value !=''">SGST Amount -
+                            {{sgstPercentage | currencypipe}} </span></label>
+
+                    <input type="text" class="form-control" formControlName="psgst_percentage" name="sgst" id="sgst"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appRoundecimal="2@2">
+
+
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label title="IGST">IGST %</label>
+                    <span class="badge-success badge p-1 font-weight-strong ml-2"
+                        *ngIf="assetinfromationformgroup.controls.pigst_percentage.value !=''">IGST Amount -
+                        {{igstPercentage | currencypipe}} </span>
+                    <input type="text" class="form-control" formControlName="pigst_percentage" name="igst" id="igst"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appRoundecimal="2@2">
+
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label title="CESS">CESS %</label>
+                    <span class="badge-success badge p-1 font-weight-strong ml-2"
+                        *ngIf="assetinfromationformgroup.controls.pcess_percentage.value !=''">CESS Amount -
+                        {{Cesspercentage | currencypipe}} </span>
+                    <input type="text" class="form-control" formControlName="pcess_percentage" name="cess" id="cess"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appRoundecimal="2@2">
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="col-3">
+                <div class="form-group">
+                    <label title="TCS">TCS %</label>
+                    <span class="badge-success badge p-1 font-weight-strong ml-2"
+                        *ngIf="assetinfromationformgroup.controls.ptcs_percentage.value !=''">TCS Amount -
+                        {{tcsPercentage | currencypipe}} </span>
+                    <input type="text" class="form-control" formControlName="ptcs_percentage" name="tcs" id="tcs"
+                        style="text-align:right;" (blur)="totalCalculation()" (blur)="grandTotalBGrid1()"
+                        appRoundecimal="2@2">
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="RC No." id="rcNo">RC No.
+                    </label>
+                    <input type="text" class="form-control" formControlName="pvehiclercno" name="rcNo" appUppercasee>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="Vehicle Reg No." id="vehicleRegNo">Vehicle Reg
+                        No.</label>
+                    <input type="text" class="form-control" formControlName="pvehicleregno" name="vehicleRegNo"
+                        id="vehicleRegNo" appUppercase>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="Chassis Number" id="chassiNo">Chassis
+                        No.</label>
+                    <input type="text" class="form-control" formControlName="pchassisno" name="chassiNo" id="chassiNo"
+                        appUppercase>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="Engine Number" id="engineNo">Engine No.</label>
+
+                    <input type="text" class="form-control" formControlName="pengineno" name="engineNo" id="engineNo">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="Model No." id="modelNo">Model No.</label>
+
+                    <input type="text" class="form-control" formControlName="pmodelno" name="modelNo" id="modelNo">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                 
+                    <label title="Fuel Type" id="fuelType">Fuel Type</label>
+
+                    <input type="text" class="form-control" formControlName="pfueltype" name="fuelType" id="fuelType">
+                </div>
+            </div>
+           
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="Department" id="department">Department</label>
+
+                    <input type="text" class="form-control" formControlName="pdepartment" name="department"
+                        id="department">
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="Location" id="location">Location</label>
+
+                    <input type="text" class="form-control" formControlName="ploaction" name="location" id="location">
+
+
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label title="vehicletype" id="vehicletype">vehicle type</label>
+
+                    <input type="text" class="form-control" formControlName="pvehicle_type" name="vehicletype"
+                        id="vehicletype">
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mb-3" hidden>
+
+            <div class="col-4">
+                <div class="border p-2">
+                    <div class="form-check">
+                        <label class="form-check-label" id="Insurance" title="Insurance">
+                            <input type="checkbox" class="form-check-input h-auto" value=""
+                                (change)="checkInsurance($event)" [checked]="insuranceShow">Insurance
+                        </label>
+                    </div>
+
+                    <div class="row mt-2" *ngIf="insuranceShow">
+                        <div class="form-group col-6">
+                            <label id="insuranceFrom" title="Insurance From">Insurance From</label>
+                            <input type="text" class="form-control" formControlName="pinsuranceFrom"
+                                (ngModelChange)="ChequeDateChangeFromDate($event)" placeholder="Date picker here"
+                                [bsConfig]="dpConfig3" #dp="bsDatepicker" bsDatepicker placement="bottom">
+
+                        </div>
+                        <div class="form-group col-6">
+                            <label id="insuranceTo" title="Insurance To">Insurance To</label>
+                            <input type="text" class="form-control" formControlName="pinsuranceTo"
+                                (ngModelChange)="ChequeDateChangeToDate($event)" placeholder="Date picker here"
+                                [bsConfig]="dpConfig5" #dp="bsDatepicker" bsDatepicker placement="bottom">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-4">
+                <div class="border p-2">
+                    <div class="form-check">
+                        <label class="form-check-label" id="Amc" title="AMC">
+                            <input type="checkbox" class="form-check-input h-auto" value="" (change)="checkAmc($event)"
+                                [checked]="amcShow">AMC
+                        </label>
+                    </div>
+
+                    <div *ngIf="amcShow">
+                        <div class="form-group mt-2">
+                            <label id="amcEndDate" title="AMC End Date">AMC End Date</label>
+                            <input type="text" class="form-control" formControlName="pamcEndDate"
+                                (ngModelChange)="ChequeDateChangeToDate($event)" placeholder="Date picker here"
+                                [bsConfig]="dpConfig3" #dp="bsDatepicker" bsDatepicker placement="bottom">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="border p-2">
+                    <div class="form-check">
+                        <label class="form-check-label" id="Warranty" title="Warranty">
+                            <input type="checkbox" class="form-check-input h-auto" value=""
+                                (change)="warrantyInsurance($event)" [checked]="warrantyShow">Warranty
+                        </label>
+                    </div>
+
+                    <div class="row mt-2" *ngIf="warrantyShow">
+                        <div class="form-group col-6">
+                            <label id="warrantyFrom" title="Warranty From">Warranty From</label>
+                            <input type="text" class="form-control" formControlName="pwarrantyFrom"
+                                (ngModelChange)="ChequeDateChangeFromDate($event)" placeholder="Date picker here"
+                                [bsConfig]="dpConfig3" #dp="bsDatepicker" bsDatepicker placement="bottom">
+
+                        </div>
+                        <div class="form-group col-6">
+                            <label id="warrantyTo" title="Warranty To">Warranty To</label>
+                            <input type="text" class="form-control" formControlName="pwarrantyTo"
+                                (ngModelChange)="ChequeDateChangeToDate($event)" placeholder="Date picker here"
+                                [bsConfig]="dpConfig5" #dp="bsDatepicker" bsDatepicker placement="bottom">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+<!-- <div class="row">
+  <div class="col-3">
+    <label>CGST Value</label>
+    <input type="text" class="form-control" formControlName="pcgstvalue" readonly>
+  </div>
+  <div class="col-3">
+    <label>SGST Value</label>
+    <input type="text" class="form-control" formControlName="psgstvalue" readonly>
+  </div>
+  <div class="col-3">
+    <label>IGST Value</label>
+    <input type="text" class="form-control" formControlName="pigstvalue" readonly>
+  </div>
+  <div class="col-3">
+    <label>CESS Value</label>
+    <input type="text" class="form-control" formControlName="pcesstvalue" readonly>
+  </div>
+  <div class="col-3 mt-2">
+    <label>TCS Value</label>
+    <input type="text" class="form-control" formControlName="ptcsvalue" readonly>
+  </div>
+</div> -->
+<!-- <div class="row mt-2">
+  <div class="col-md-6">
+    <label>Particulars</label>
+    <input type="text" class="form-control" formControlName="pparticulars">
+  </div>
+  <div class="col-md-6">
+    <label>Branch Name</label>
+    <input type="text" class="form-control" formControlName="pbranchname">
+  </div>
+</div> -->
+
+
+        <div class="col-12 p-0 form-group mt-4" hidden>
+            <label id="pnarration" title="Narration">Narration</label>
+            <textarea class="form-control" style="height:80px" formControlName="pnarration" maxlength="150"></textarea>
+
+        </div>
+<hr>
+<h4 class="badge-success badge font-weight-bold p-3 font-14 btn-block mt-4 pt-3 w-25 ">
+  Grand Total : {{ invoicelistCalculation1 | currencypipe }}
+</h4>
+
+
+
+        
+
+
+    </form>
+
+     <div class="row" >
+            <div class="col-md-12">
+                <div class="d-flex justify-content-end">
+                    <!-- <a (click)="clearDataSave()" class="btn btn-g-icon mr-2 px-3 border-0">
+                        <img src="assets/images/close-filled.svg" width="20px" height="20px" class="mr-1" />Cancel</a> -->
+                    <a (click)="onsave()" class="btn btn-g-icon px-3 border-0">
+                        <img src="assets/images/tick.svg" width="20px" height="20px" class="mr-1" />Update</a>
+
+                </div>
+            </div>
+        </div>
+</div>
+
