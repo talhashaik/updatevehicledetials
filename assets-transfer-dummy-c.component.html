@@ -1,0 +1,231 @@
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="section-content ">
+            <div class="card-box mt-2 mb-3">
+                <span class="bc-2"> Asset Transfer</span>
+            </div>
+            <div class="row mt-4 py-1">
+                <div class="col  align-items-center" style="text-align: end;">
+                    <a (click)="add()" class="btn btn-b-icon border-0"><img src="assets/images/icon-back-blue.svg"
+                            width="20px" height="20px" class="mr-2" />View</a>
+                </div>
+
+            </div>
+            <form [formGroup]="assetTransferForm">
+                <div class="row">
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pdateoftransfer" title="Date of Sale">Date of Transfer</label>
+                            <input type="text" class="form-control" formControlName="pdateoftransfer"
+                                placeholder="Date picker here" [bsConfig]="dpConfig2" #dp="bsDatepicker" bsDatepicker
+                                placement="bottom" (ngModelChange)="changeTransferDate($event)">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="passetname" title="Nature Of Asset">Nature Of Asset</label>
+                            <ng-select [items]="getNatureOfAssetsData" id="passetname"
+                                (change)="ChangeNatureOfAsset($event)" formControlName="passetname"
+                                bindLabel="pnatureof_asset" bindValue="pnatureof_asset" [multiple]=false
+                                placeholder="Select" [searchable]=true [clearable]=false dropdownPosition="bottom"
+                                [clearOnBackspace]=true>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="psubclassificationofasset" title="Sub-classification of Asset">Sub-classification
+                                of Asset</label>
+                            <ng-select [items]="getSubClassificationOfAssetsData" id="psubclassificationofasset"
+                                (change)="ChangegetSubClassificationOfAssets($event)"
+                                formControlName="psubclassificationofasset" bindLabel="psubclassificationof_asset"
+                                bindValue="psubclassificationof_asset" [multiple]=false placeholder="Select"
+                                [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pmainassetcode" title="Asset Code"> Main Asset Code</label>
+                            <ng-select [items]="getAssetsCodesData" id="pmainassetcode" formControlName="pmainassetcode"
+                                (change)="changeMainAssetCode($event)" bindLabel="passetcode" bindValue="passetcode"
+                                [multiple]=false placeholder="Select" [searchable]=true [clearable]=false
+                                dropdownPosition="bottom" [clearOnBackspace]=true></ng-select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="passetcode" title="Asset Code">Asset Code</label>
+                            <ng-select [items]="AssetCodedata" id="passetcode" formControlName="passetcode"
+                                bindLabel="pAssetcode" bindValue="pAssetcode" [multiple]=false placeholder="Select"
+                                [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true
+                                (change)="changeAssetCode($event)">
+                            </ng-select>
+                            <!-- <ng-multiselect-dropdown [settings]="dropdownSettings" [(ngModel)]="selectedItems"
+                                    [data]="AssetCodedata" (onSelect)="onItemSelect($event)" formControlName="passetcode"
+                                    (onDeSelect)="onDeSelect($event)" (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelectAll)="onDeSelectAll($event)"
+                                    [ngClass]="{ 'is-invalid': auctionminutevalidation.passetcode}" >
+                                </ng-multiselect-dropdown> -->
+                            <!-- <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="AssetCodedata"
+                                [placeholder]="'Select Asset Code'" formControlName="passetcode"
+                                (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)"
+                                (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.passetcode}">
+                            </ng-multiselect-dropdown> -->
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4" hidden>
+                        <div class="form-group">
+                            <label id="pCostOfAsset" title="Original Cost"> Original Cost</label>
+                            <input type="text" class="form-control" readonly formControlName="pCostOfAsset">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pexistingholder" title="Existing Holder / Transfer To">Existing Holder / Transfer
+                                To</label>
+                            <input type="text" class="form-control" formControlName="pexistingholder">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="ptolcation" title="To Location">To Location</label>
+                            <input type="text" class="form-control" formControlName="ptolcation" appAlphanumeric>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="ptodepartment" title="To Departement">To Departement</label>
+                            <input type="text" class="form-control" formControlName="ptodepartment" maxlength="10"
+                                appUppercase appAlphanumeric>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pnewholder" title="New Holder/ Transferee">New Holder/ Transferee</label>
+                            <input type="text" class="form-control" formControlName="pnewholder">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="ptransferauthorizedby" title="Transfer Authorized by">Transfer Authorized
+                                by</label>
+                            <input type="text" class="form-control" formControlName="ptransferauthorizedby">
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="border p-2">
+                            <label class="mt-n4 ml-2 p-1 position-absolute bg-white"><b>Company Act (WDV)</b> </label>
+                            <div class="row mt-4">
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pdepreciationclaimedtilldate"
+                                            title="Description Claimed Date">Depreciation Claimed
+                                            Till Date</label>
+                                        <input type="number" class="form-control" readonly
+                                            formControlName="pdepreciationclaimedtilldate">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pcompanywdvcarryingvaluetransfer" title="Carrying Value">Carrying
+                                            Value</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="pcompanywdvcarryingvaluetransfer" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4" hidden>
+                                    <div class="form-group">
+                                        <label id="pProfitLoss" title="Profit/Loss">Profit
+                                            /
+                                            (Loss)</label>
+
+                                        <span class=" badge p-1 font-weight-strong ml-2 text-white"
+                                            *ngIf="assetTransferForm.controls.pProfitLoss.value !=''"
+                                            [ngStyle]="profitOrLossValue=='LOSS'?{'background-color':'red'} : {'background-color': 'green'}">
+                                            {{profitOrLossValue}} </span>
+                                        <input type="text" readonly class="form-control" formControlName="pProfitLoss">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="border p-2">
+                            <label class="mt-n4 ml-2 p-1 position-absolute bg-white "><b>Income Tax Act (WDV)</b>
+                            </label>
+                            <div class="row mt-4">
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pincomtaxwdvdepreciationclaimedtilldate"
+                                            title="Description Claimed Date">Depreciation Claimed
+                                            Till Date</label>
+                                        <input type="number" class="form-control" readonly
+                                            formControlName="pincomtaxwdvdepreciationclaimedtilldate">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pincometaxwdvcarryingvaluetransfer" title="Carrying Value">Carrying
+                                            Value</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="pincometaxwdvcarryingvaluetransfer" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4" hidden>
+                                    <div class="form-group">
+                                        <label *ngIf="profitOrLossValueForIncomeTax==''" id="pProfitLossForIncomeTax"
+                                            title="Profit/Loss">Profit
+                                            /
+                                            (Loss)</label>
+
+                                        <span class=" badge p-1 font-weight-strong ml-2 text-white"
+                                            *ngIf="assetTransferForm.controls.pProfitLossForIncomeTax.value !=''"
+                                            [ngStyle]="profitOrLossValueForIncomeTax=='LOSS'?{'background-color':'red'} : {'background-color': 'green'}">
+                                            {{profitOrLossValueForIncomeTax}} </span>
+                                        <input type="text" readonly class="form-control"
+                                            formControlName="pProfitLossForIncomeTax">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12 ">
+                        <div class="d-flex justify-content-end">
+                            <a (click)="saveAssetsTransfer()" class="btn btn-g-icon px-3 border-0">
+                                <img src="assets/images/tick.svg" width="20px" height="20px" class="mr-1" />Save</a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,348 @@
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="section-content ">
+            <div class="card-box mt-2 mb-3">
+                <span class="bc-2"> Sale of Assets</span>
+            </div>
+            <div class="row mt-4 py-1">
+                <div class="col  align-items-center" style="text-align: end;">
+                    <a (click)="add()" class="btn btn-b-icon border-0"><img src="assets/images/icon-back-blue.svg"
+                            width="20px" height="20px" class="mr-2" />View</a>
+                </div>
+
+            </div>
+            <form [formGroup]="SaleofAssetsForm">
+                <div class="row">
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pDateofSale" title="Date of Sale">Date of Sale</label>
+                            <input type="text" class="form-control" formControlName="pDateofSale"
+                                placeholder="Date picker here" [bsConfig]="dpConfig2" #dp="bsDatepicker" bsDatepicker
+                                placement="bottom" (ngModelChange)="changeSaleDate($event)">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="natureofasset" title="Nature Of Asset">Nature Of Asset</label>
+                            <ng-select [items]="getNatureOfAssetsData" id="natureofasset"
+                                (change)="ChangeNatureOfAsset($event)" formControlName="natureofasset"
+                                bindLabel="pnatureof_asset" bindValue="pnatureof_asset" [multiple]=false
+                                placeholder="Select" [searchable]=true [clearable]=false dropdownPosition="bottom"
+                                [clearOnBackspace]=true
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.natureofasset}">
+                            </ng-select>
+                            <app-validation-message
+                                [messgae]="auctionminutevalidation.natureofasset"></app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="psubclassificationofasset" title="Sub-classification of Asset">Sub-classification
+                                of Asset</label>
+                            <ng-select [items]="getSubClassificationOfAssetsData" id="psubclassificationofasset"
+                                (change)="ChangegetSubClassificationOfAssets($event)"
+                                formControlName="psubclassificationofasset" bindLabel="psubclassificationof_asset"
+                                bindValue="psubclassificationof_asset" [multiple]=false placeholder="Select"
+                                [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.psubclassificationofasset}">
+                            </ng-select>
+                            <app-validation-message
+                                [messgae]="auctionminutevalidation.psubclassificationofasset"></app-validation-message>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pMainAssetCode" title="Asset Code"> Main Asset Code</label>
+                            <ng-select [items]="getAssetsCodesData" id="pMainAssetCode" formControlName="pMainAssetCode"
+                                (change)="changeMainAssetCode($event)" bindLabel="passetcode" bindValue="passetcode"
+                                [multiple]=false placeholder="Select" [searchable]=true [clearable]=false
+                                dropdownPosition="bottom" [clearOnBackspace]=true
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pMainAssetCode}">
+
+                                >
+                            </ng-select>
+                            <app-validation-message
+                                [messgae]="auctionminutevalidation.pMainAssetCode"></app-validation-message>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pAssetCode" title="Asset Code">Asset Code</label>
+                            <ng-select [items]="AssetCodedata" id="pAssetCode" formControlName="pAssetCode"
+                                bindLabel="pAssetcode" bindValue="pAssetcode" [multiple]=false placeholder="Select"
+                                [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pAssetCode}"
+                                (change)="changeAssetCode($event)">
+                            </ng-select>
+                            <app-validation-message [messgae]="auctionminutevalidation.pAssetCode">
+                            </app-validation-message>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pCostOfAsset" title="Original Cost"> Original Cost</label>
+                            <input type="text" class="form-control" readonly formControlName="pCostOfAsset"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pCostOfAsset}">
+                            <app-validation-message [messgae]="auctionminutevalidation.pCostOfAsset">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pSoldTo" title="Sold To">Sold To</label>
+                            <input type="text" class="form-control" formControlName="pSoldTo"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pSoldTo}">
+                            <app-validation-message [messgae]="auctionminutevalidation.pSoldTo">
+                            </app-validation-message>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pPAN" title="PAN">PAN Number</label>
+                            <input type="text" class="form-control" formControlName="pPAN"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pPAN}" maxlength="10" appUppercase
+                                appAlphanumeric>
+                            <app-validation-message [messgae]="auctionminutevalidation.pPAN">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pSaleValue" title="Sale Value">Sale Value</label>
+                            <input type="text" class="form-control" style="text-align: right;" formControlName="pSaleValue"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pSaleValue}"
+                                (blur)="validatingGST()">
+                            <app-validation-message [messgae]="auctionminutevalidation.pSaleValue">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pGSTIN" title="GSTIN">GSTIN</label>
+                            <input type="text" class="form-control" style="text-align: right;" formControlName="pGSTIN" [ngClass]="{ 'is-invalid': auctionminutevalidation.pGSTIN}">
+                            <app-validation-message [messgae]="auctionminutevalidation.pGSTIN">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label title="CGST">CGST %</label>
+                            <span class="badge-success badge p-1 font-weight-strong ml-2"
+                                *ngIf="SaleofAssetsForm.controls.pCGST.value !=''">CGST Amount -
+                                {{cgstPercentage | currencypipe}} </span>
+                            <input type="text" class="form-control" id="pCGST" (blur)="validatingGST()" style="text-align: right;"
+                                formControlName="pCGST">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label title="SGST">SGST %</label>
+                            <span class="badge-success badge p-1 font-weight-strong ml-2"
+                                *ngIf="SaleofAssetsForm.controls.pSGST.value !=''">SGST Amount -
+                                {{sgstPercentage | currencypipe}} </span>
+                            <input type="text" class="form-control" id="pSGST" (blur)="validatingGST()" style="text-align: right;"
+                                formControlName="pSGST">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label title="IGST">IGST %</label>
+                            <span class="badge-success badge p-1 font-weight-strong ml-2"
+                                *ngIf="SaleofAssetsForm.controls.pIGST.value !=''">IGST Amount -
+                                {{igstPercentage | currencypipe}} </span>
+                            <input type="text" class="form-control" id="pIGST" (blur)="validatingGST()" style="text-align: right;"
+                                formControlName="pIGST">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4">
+                        <div class="form-group">
+                            <label id="pTotalSaleValue" title="Total Sale Value">Total Sale Value</label>
+                            <input type="text" class="form-control" formControlName="pTotalSaleValue" readonly style="text-align: right;"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pTotalSaleValue}">
+                            <app-validation-message [messgae]="auctionminutevalidation.pTotalSaleValue">
+                            </app-validation-message>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-xl-4" hidden>
+                        <div class="form-group">
+                            <label id="pDescriptionClaimedDate" title="Description Claimed Date">Depreciation Claimed
+                                Till Date</label>
+                            <input type="text" class="form-control"  style="text-align: right;" readonly formControlName="pDescriptionClaimedDate"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pDescriptionClaimedDate}">
+                            <app-validation-message [messgae]="auctionminutevalidation.pDescriptionClaimedDate">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4" hidden>
+                        <div class="form-group">
+                            <label id="pwdvCarryingValue" title="Carrying Value">Carrying Value</label>
+                            <input type="text" class="form-control" formControlName="pwdvCarryingValue" style="text-align: right;"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pwdvCarryingValue}" readonly>
+                            <app-validation-message [messgae]="auctionminutevalidation.pwdvCarryingValue">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xl-4" hidden>
+                        <div class="form-group">
+                            <label *ngIf="profitOrLossValue==''" id="pProfitLoss" title="Profit/Loss">Profit /
+                                Loss</label>
+                            <label *ngIf="profitOrLossValue=='PROFIT'" id="pProfitLoss"
+                                title="Profit/Loss"><b>(Profit)</b> /
+                                Loss</label>
+                            <label *ngIf="profitOrLossValue=='LOSS'" id="pProfitLoss" title="Profit/Loss">Profit /
+                                <b>(Loss)</b> </label>
+                            <span class=" badge p-1 font-weight-strong ml-2 text-white"
+                                *ngIf="SaleofAssetsForm.controls.pProfitLoss.value !=''"
+                                [ngStyle]="profitOrLossValue=='LOSS'?{'background-color':'red'} : {'background-color': 'green'}">
+                                {{profitOrLossValue}} </span>
+                            <input type="text" readonly class="form-control" formControlName="pProfitLoss" style="text-align: right;"
+                                [ngClass]="{ 'is-invalid': auctionminutevalidation.pProfitLoss}">
+                            <app-validation-message [messgae]="auctionminutevalidation.pProfitLoss">
+                            </app-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="border p-2">
+                            <label class="mt-n4 ml-2 p-1 position-absolute bg-white"><b>Company Act (WDV)</b> </label>
+                            <div class="row mt-4">
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pDescriptionClaimedDate"
+                                            title="Description Claimed Date">Depreciation Claimed
+                                            Till Date</label>
+                                        <input type="text" class="form-control" readonly style="text-align: right;"
+                                            formControlName="pDescriptionClaimedDate"
+                                            [ngClass]="{ 'is-invalid': auctionminutevalidation.pDescriptionClaimedDate}">
+                                        <app-validation-message
+                                            [messgae]="auctionminutevalidation.pDescriptionClaimedDate">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pwdvCarryingValue" title="Carrying Value">Carrying Value</label>
+                                        <input type="text" class="form-control" formControlName="pwdvCarryingValue" style="text-align: right;"
+                                            [ngClass]="{ 'is-invalid': auctionminutevalidation.pwdvCarryingValue}"
+                                            readonly>
+                                        <app-validation-message [messgae]="auctionminutevalidation.pwdvCarryingValue">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label  id="pProfitLoss" title="Profit/Loss">Profit
+                                            /
+                                            (Loss)</label>
+                                        <!-- <label *ngIf="profitOrLossValue=='PROFIT'" id="pProfitLoss"
+                                            title="Profit/Loss"><b>(Profit)</b> /
+                                            Loss</label> -->
+                                        <!-- <label *ngIf="profitOrLossValue=='LOSS'" id="pProfitLoss"
+                                            title="Profit/Loss">Profit /
+                                            <b>(Loss)</b> </label> -->
+                                        <span class=" badge p-1 font-weight-strong ml-2 text-white"
+                                            *ngIf="SaleofAssetsForm.controls.pProfitLoss.value !=''"
+                                            [ngStyle]="profitOrLossValue=='LOSS'?{'background-color':'red'} : {'background-color': 'green'}">
+                                            {{profitOrLossValue}} </span>
+                                        <input type="text" readonly class="form-control" formControlName="pProfitLoss" style="text-align: right;"
+                                            [ngClass]="{ 'is-invalid': auctionminutevalidation.pProfitLoss}">
+                                        <app-validation-message [messgae]="auctionminutevalidation.pProfitLoss">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-xl-12">
+                        <div class="border p-2">
+                            <label class="mt-n4 ml-2 p-1 position-absolute bg-white "><b>Income Tax Act (WDV)</b>
+                            </label>
+                            <div class="row mt-4">
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pDescriptionClaimedDateForIncomeTax"
+                                            title="Description Claimed Date">Depreciation Claimed
+                                            Till Date</label>
+                                        <input type="text" class="form-control" readonly style="text-align: right;"
+                                            formControlName="pDescriptionClaimedDateForIncomeTax"
+                                            [ngClass]="{ 'is-invalid': auctionminutevalidation.pDescriptionClaimedDateForIncomeTax}">
+                                        <app-validation-message
+                                            [messgae]="auctionminutevalidation.pDescriptionClaimedDateForIncomeTax">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label id="pwdvCarryingValueForIncomeTax" title="Carrying Value">Carrying Value</label>
+                                        <input type="text" class="form-control" formControlName="pwdvCarryingValueForIncomeTax" style="text-align: right;"
+                                            [ngClass]="{ 'is-invalid': auctionminutevalidation.pwdvCarryingValueForIncomeTax}"
+                                            readonly>
+                                        <app-validation-message [messgae]="auctionminutevalidation.pwdvCarryingValueForIncomeTax">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label *ngIf="profitOrLossValueForIncomeTax==''" id="pProfitLossForIncomeTax" title="Profit/Loss">Profit
+                                            /
+                                            (Loss)</label>
+                                        <!-- <label *ngIf="profitOrLossValueForIncomeTax=='PROFIT'" id="pProfitLossForIncomeTax"
+                                            title="Profit/Loss"><b>(Profit)</b> /
+                                            Loss</label> -->
+                                        <!-- <label *ngIf="profitOrLossValueForIncomeTax=='LOSS'" id="pProfitLossForIncomeTax"
+                                            title="Profit/Loss">Profit /
+                                            <b>(Loss)</b> </label> -->
+                                        <span class=" badge p-1 font-weight-strong ml-2 text-white"
+                                            *ngIf="SaleofAssetsForm.controls.pProfitLossForIncomeTax.value !=''"
+                                            [ngStyle]="profitOrLossValueForIncomeTax=='LOSS'?{'background-color':'red'} : {'background-color': 'green'}">
+                                            {{profitOrLossValueForIncomeTax}} </span>
+                                        <input type="text" readonly class="form-control" formControlName="pProfitLossForIncomeTax" style="text-align: right;"
+                                            [ngClass]="{ 'is-invalid': auctionminutevalidation.pProfitLossForIncomeTax}">
+                                        <app-validation-message [messgae]="auctionminutevalidation.pProfitLossForIncomeTax">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col-md-12 ">
+                        <div class="d-flex justify-content-end">
+                            <a (click)="clearDataSave()" class="btn btn-g-icon mr-2 px-3 border-0">
+                                <img src="assets/images/close-filled.svg" width="20px" height="20px"
+                                    class="mr-1" />Cancel</a>
+                            <a (click)="saveAssets()" class="btn btn-g-icon px-3 border-0">
+                                <img src="assets/images/tick.svg" width="20px" height="20px" class="mr-1" />Save</a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

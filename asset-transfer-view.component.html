@@ -1,0 +1,179 @@
+<div class="row">
+    <div class="col-xl-12 col-md-12">
+        <div class="section-content ">
+            <div class="card-box mt-2 mb-3">
+                <span class="bc-2">Asset Transfer View</span>
+            </div>
+            <div class="row mt-4 py-1">
+                <div class="col  align-items-center" style="text-align: end;">
+                    <a (click)="add()" class="btn btn-b-icon border-0"><img
+                            src="assets/images/icon-add-blue-rounded.svg" width="20px" height="20px"
+                            class="mr-2" />New</a>
+                </div>
+
+            </div>
+
+            <div class="row d-flex col-md-12 mt-3">
+            </div>
+
+            <div class="card-box">
+                <div class="row d-flex">
+                    <div class="col-md-12">
+
+                        <div class="card-box">
+                            <div class="row d-flex">
+                                <div class="col-md-12">
+                                    <kendo-grid [data]="ViewAssetTransferData" [height]="600" [scrollable]="'virtual'"
+                                        [pageSize]="500" [pageable]="false" [rowHeight]="35">
+                                        <!-- --------------- TOOLBAR (PDF + EXCEL) ---------------- -->
+                                        <!-- <ng-template kendoGridToolbarTemplate>
+            <div class="d-flex justify-content-end w-100 mt-3">
+                <a kendoGridPDFCommand class="mr-3">
+                    <img src="assets/images/pdf-icon-blue.svg" width="22" title="PDF Export">
+                </a>
+                <a kendoGridExcelCommand>
+                    <img src="assets/images/icon-excel.svg" width="22" title="Excel Export">
+                </a>
+            </div>
+        </ng-template> -->
+                                        <ng-template kendoGridToolbarTemplate>
+                                            <div class="row mb-3">
+                                                <div class="col-12 mt-2 d-flex justify-content-end">
+                                                    <ul class="temp-ul pull-right">
+                                                        <li class="temp-ico">
+                                                            <a kendoGridPDFCommand><img class="pt-2"
+                                                                    src="assets/images/pdf-icon-blue.svg " title="pdf"
+                                                                    width="20px"></a>
+                                                        </li>
+                                                        <li class="temp-ico mr-5">
+                                                            <a kendoGridExcelCommand><img class="pt-2"
+                                                                    src="assets/images/icon-excel.svg " title="Excel"
+                                                                    width="20px"></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                        <!-- ---------------- GRID COLUMNS ---------------- -->
+
+
+                                        <kendo-grid-column field="pdateoftransfer" title="Date Of Transfer" width="100"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="passetname" title="Nature Of Asset" width="120"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="psubclassificationofasset"
+                                            title="Sub Classification Of Asset" width="120"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="pmainassetcode" title="Main Asset Code" width="100"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="passetcode" title="Asset Code" width="110"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <!-- <kendo-grid-column title="Asset Code" field="passetcode">
+    <ng-template kendoGridCellTemplate let-dataItem>
+        {{ getAssetCodes(dataItem.passetcode) }}
+    </ng-template>
+</kendo-grid-column> -->
+                                        <!-- <kendo-grid-column field="pCostOfAsset" title="Cost Of Asset" width="90"
+                                [headerClass]="{'kendo-center': true}" class="kendo-center">
+                                <ng-template kendoGridCellTemplate let-dataItem>
+                                    {{dataItem.pCostOfAsset | currencypipe}} <span class="mr-4"></span>
+                                </ng-template>
+                            </kendo-grid-column> -->
+
+                                        <kendo-grid-column field="pexistingholder" title="Existing Holder" width="120"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="ptolcation" title="To Location" width="120"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="ptodepartment" title="To Departement" width="110"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="pnewholder" title="New Holder/ Transferee" width="110"
+                                            [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="ptransferauthorizedby" title="Transfer Authorized by"
+                                            width="110" [headerClass]="{'kendo-center': true}"
+                                            class="kendo-center"></kendo-grid-column>
+                                        <kendo-grid-column field="pdepreciationclaimedtilldate"
+                                            title="Description Claimed Date For Company Act" width="120"
+                                            [headerClass]="{'kendo-center': true}" class="kendo-center">
+                                            <ng-template kendoGridCellTemplate let-dataItem>
+                                                <span class="mr-4"> {{dataItem.pdepreciationclaimedtilldate |
+                                                    currencypipe}}
+                                                </span>
+                                            </ng-template>
+                                        </kendo-grid-column>
+
+                                        <kendo-grid-column field="pcompanywdvcarryingvaluetransfer"
+                                            title="WDV Carrying Value For Company Act" width="120"
+                                            [headerClass]="{'kendo-center': true}" class="kendo-center">
+                                            <ng-template kendoGridCellTemplate let-dataItem>
+                                                {{dataItem.pcompanywdvcarryingvaluetransfer | currencypipe}} <span
+                                                    class="mr-4"></span>
+                                            </ng-template>
+                                        </kendo-grid-column>
+
+                                        <kendo-grid-column field="pincomtaxwdvdepreciationclaimedtilldate"
+                                            title="Description Claimed Date For Income Tax" width="100"
+                                            [headerClass]="{'kendo-center': true}" class="kendo-center">
+                                            <ng-template kendoGridCellTemplate let-dataItem>
+                                                {{dataItem.pincomtaxwdvdepreciationclaimedtilldate | currencypipe}}
+                                                <span class="mr-4"></span>
+                                            </ng-template>
+                                        </kendo-grid-column>
+                                        <kendo-grid-column field="pincometaxwdvcarryingvaluetransfer"
+                                            title="WDV Carrying Value For Income Tax" width="100"
+                                            [headerClass]="{'kendo-center': true}" class="kendo-center">
+                                            <ng-template kendoGridCellTemplate let-dataItem>
+                                                {{dataItem.pincometaxwdvcarryingvaluetransfer | currencypipe}} <span
+                                                    class="mr-4"></span>
+                                            </ng-template>
+                                        </kendo-grid-column>
+
+
+                                        <!-- ---------------- PDF EXPORT ---------------- -->
+                                        <!-- <kendo-grid-pdf fileName="Sale_Assets__Report.pdf" paperSize="A2" [allPages]="true"
+                                [repeatHeaders]="true" [landscape]="true" scale="0.2"> -->
+                                        <kendo-grid-pdf fileName="Transfer_Assets__Report.pdf" [repeatHeaders]="true"
+                                            [allPages]="true" [scale]="0.4" [landscape]="true" paperSize="A3">
+                                            <kendo-grid-pdf-margin top="4cm" bottom="2cm" left="1cm"
+                                                right="1cm"></kendo-grid-pdf-margin>
+                                            <ng-template kendoGridPDFTemplate>
+                                                <div class="page-template">
+                                                    <div class="header">
+                                                        <!-- <app-company-details></app-company-details> -->
+
+                                                        <div class="report-head mt-2">
+                                                            <p class="font-15 text-dark text-center m-0"
+                                                                [ngClass]="{ 'bold-text': isBold }">
+                                                                <span class="text-capitalize">Transfer
+                                                                    Assets_Report</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </kendo-grid-pdf>
+
+                                        <!-- ---------------- EXCEL EXPORT ---------------- -->
+                                        <kendo-grid-excel fileName="Transfer_Assets__Report.xlsx"
+                                            [fetchData]="allData"></kendo-grid-excel>
+                                    </kendo-grid>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+</div>
