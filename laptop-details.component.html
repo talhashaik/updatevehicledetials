@@ -1,0 +1,110 @@
+<div class="col-xl-12 col-md-12">
+    <div class="section-content ">
+        <div class="card-box mt-2 mb-3">
+            <span class="bc-2">Laptop Information</span>
+        </div>
+        <div class="row mt-4 py-1">
+            <div class="col  align-items-center" style="text-align: end;">
+                <!-- <a (click)="view()" class="btn btn-b-icon border-0"><img src="assets/images/icon-back-blue.svg"
+                            width="20px" height="20px" class="mr-2" />View</a> -->
+                <a (click)="view()" class="btn btn-b-icon border-0">
+                    <img src="assets/images/icon-back-blue.svg" width="20px" height="20px" class="mr-2" />
+                    {{ buttonText }}
+                </a>
+            </div>
+        </div>
+        <form [formGroup]="assetForm" (ngSubmit)="saveData()">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label id="purchaseDate" title="Purchase Date">Purchase Date</label>
+                    <input type="text" class="form-control" formControlName="purchaseddate"
+                        placeholder="Date picker here" [bsConfig]="dpConfig" #dp="bsDatepicker" bsDatepicker
+                        (bsValueChange)="assetForm.patchValue({ purchaseddate: $event })" placement="bottom">
+                </div>
+                <!-- Brand Dropdown -->
+                <!-- <div class="form-group col-md-4">
+                    <label id="pbrand" title="Brand"> laptop Brand</label>
+                    <ng-select [items]="brands" bindLabel="name" bindValue="name" id="pbrand"
+                        formControlName="laptop_brand" [multiple]="false" [searchable]="true" [clearable]="false"
+                        placeholder="-- Select Brand --" dropdownPosition="bottom">
+                    </ng-select>
+                </div> -->
+
+                <div class="form-group col-md-4">
+                    <label for="laptop_brand" title="Brand">Laptop Brand</label>
+                    <ng-select [items]="brands" bindLabel="laptop_brand" bindValue="laptop_brand" id="laptop_brand"
+                        formControlName="laptop_brand" [multiple]="false" [searchable]="true" [clearable]="false"
+                        placeholder="-- Select Brand --" dropdownPosition="bottom">
+                    </ng-select>
+                </div>
+
+
+                <div class="col-md-4 form-group">
+                    <label id="pserailno" title="serial No">Serial No</label>
+                    <input type="text" class="form-control" formControlName="serial_no">
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="form-group col-md-4">
+                    <label id="company_name" title="Company Name">Company Name</label>
+                    <!-- <ng-select [items]="companies" bindLabel="vchcompanyname" bindValue="vchcompanyname" id="company_name"
+                        formControlName="company_name" placeholder="-- Select Company --" [multiple]="false"
+                        [searchable]="true" [clearable]="false" dropdownPosition="bottom"
+                        (change)="onCompanyChange($event)">
+                    </ng-select> -->
+                    <input type="text" id="pbranch" formControlName="company_name" class="form-control"
+                        placeholder="-- Select Company --" (input)="onCompanyChange($event)">
+                </div>
+                <!-- Branch Dropdown -->
+                <!-- <div class="form-group col-md-4">
+                    <label id="pbranch" title="Branch Name">Branch Name</label>
+                    <ng-select [items]="branches" bindLabel="name" bindValue="id" id="pbranch" formControlName="pbranch"
+                        placeholder="-- Select Branch --" [multiple]="false" [searchable]="true" [clearable]="false"
+                        dropdownPosition="bottom" (change)="onBranchChange($event)">
+                    </ng-select>
+                </div> -->
+
+
+                <!-- <div class="form-group col-md-4">
+                    <label id="pbranch" title="Branch Name">Branch Name</label>
+                    <input type="text" id="pbranch" formControlName="pbranch" placeholder="-- Select Branch --"
+                         (input)="onBranchChange($event)" />
+                         [value]="selectedBranch?.name"
+                </div>  -->
+
+
+                <div class="form-group col-md-4">
+                    <label id="pbranch" title="Branch Name">Branch Name</label><br>
+                    <input type="text" id="pbranch" formControlName="branch_name" class="form-control"
+                        placeholder="-- Select Branch --" (input)="onBranchChange($event.target.value)" />
+                    <!-- (input)="onBranchChange($event)" -->
+                </div>
+
+                <!-- Employee Dropdown -->
+                <div class="form-group col-md-4">
+                    <label id="custodyat" title="Employee Name">Employee Name</label>
+                    <ng-select [items]="employees" bindLabel="pemployeename" bindValue="pemployeename" id="custodyat"
+                        formControlName="custodyat" placeholder="-- Select Employee --" [multiple]="false"
+                        [searchable]="true" [clearable]="false" dropdownPosition="bottom"
+                        (change)="onEmployeeChange($event)">
+                    </ng-select>
+                </div>
+
+
+
+                <!-- Designation (Auto Bind) -->
+                <div class="form-group col-md-4">
+                    <label id="pdesignation" title="Designation">Designation</label>
+                    <input type="text" class="form-control" formControlName="designation" />
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-primary mt-3" type="submit">
+                Submit
+            </button>
+        </form>
+    </div>
+</div>
