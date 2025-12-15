@@ -1,0 +1,114 @@
+<div class="col-xl-12 col-md-12">
+    <div class="card-box mt-2 mb-3">
+        <span class="bc-2">Laptop Data</span>
+   
+    </div>
+          
+               <div class="row mb-4">
+                 <div class="col  align-items-center" style="text-align: end;">
+                    <a (click)="add()" class="btn btn-b-icon border-0"><img
+                            src="assets/images/icon-add-blue-rounded.svg" width="20px" height="20px"
+                            class="mr-2" />New</a>
+                </div>
+               </div>
+
+  
+
+    <kendo-grid [data]="LaptopdataList" [height]="600" [scrollable]="'virtual'" [pageSize]="100" [rowHeight]="35">
+        <!-- --------------- TOOLBAR (PDF + EXCEL) ---------------- -->
+        <!-- <ng-template kendoGridToolbarTemplate>
+            <div class="d-flex justify-content-end w-100 mt-3">
+                <a kendoGridPDFCommand class="mr-3">
+                    <img src="assets/images/pdf-icon-blue.svg" width="22" title="PDF Export">
+                </a>
+                <a kendoGridExcelCommand>
+                    <img src="assets/images/icon-excel.svg" width="22" title="Excel Export">
+                </a>
+            </div>
+        </ng-template> -->
+        <ng-template kendoGridToolbarTemplate>
+            <div class="row mb-3">
+                <div class="col-12 mt-2 d-flex justify-content-end">
+                    <ul class="temp-ul pull-right">
+                        <li class="temp-ico">
+                            <a kendoGridPDFCommand><img class="pt-2" src="assets/images/pdf-icon-blue.svg " title="pdf"
+                                    width="20px"></a>
+                        </li>
+                        <li class="temp-ico mr-5">
+                            <a kendoGridExcelCommand><img class="pt-2" src="assets/images/icon-excel.svg " title="Excel"
+                                    width="20px"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </ng-template>
+        <!-- ---------------- GRID COLUMNS ---------------- -->
+        <kendo-grid-column field="company_name" title="Company Name" width="120" [headerClass]="{'kendo-center': true}" class="kendo-center"></kendo-grid-column>
+        <kendo-grid-column field="branch_name" title="Branch Name" width="120" [headerClass]="{'kendo-center': true}" class="kendo-center"></kendo-grid-column>
+        <kendo-grid-column field="custodyat" title="Employee Name" width="120" [headerClass]="{'kendo-center': true}" class="kendo-center"></kendo-grid-column>
+        <kendo-grid-column field="designation" title="Designation" width="70" [headerClass]="{'kendo-center': true}" class="kendo-center"></kendo-grid-column>
+        <kendo-grid-column field="laptop_brand" title="Laptop Brand" width="60" [headerClass]="{'kendo-center': true}" class="kendo-center"></kendo-grid-column>
+        <kendo-grid-column field="serial_no" title="Serial No" width="60" [headerClass]="{'kendo-center': true}" class="kendo-center"></kendo-grid-column>
+        <kendo-grid-column field="purchaseddate" title="Purchase Date" width="60" [headerClass]="{'kendo-center': true}" class="kendo-center">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                {{dataItem.purchaseddate | date:'dd-MM-yyyy'}}
+            </ng-template>
+        </kendo-grid-column>
+        <!-- ---------------- PDF EXPORT ---------------- -->
+        <kendo-grid-pdf fileName="Laptop_Report.pdf" paperSize="A2" [allPages]="true" [repeatHeaders]="true"
+            [landscape]="true">
+            <kendo-grid-pdf-margin top="4cm" bottom="2cm" left="1cm" right="1cm"></kendo-grid-pdf-margin>
+            <ng-template kendoGridPDFTemplate>
+                <div class="page-template">
+                    <div class="header">
+                        <!-- <app-company-details></app-company-details> -->
+
+                        <div class="report-head mt-2">
+                            <p class="font-15 text-dark text-center m-0" [ngClass]="{ 'bold-text': isBold }">
+                                <span class="text-capitalize">Laptop Report</span>
+                            </p>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </ng-template>
+        </kendo-grid-pdf>        
+
+        <!-- ---------------- EXCEL EXPORT ---------------- -->
+        <kendo-grid-excel fileName="Laptop_Report.xlsx" [fetchData]="allData"></kendo-grid-excel>
+    </kendo-grid>
+</div>
+
+
+<!-- <style>
+    .page-template {
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.pdf-header {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+}
+
+.pdf-footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: right;
+    font-size: 10px;
+}
+
+.pdf-body {
+    position: absolute;
+    top: 120px; /* Adjust based on header height */
+    left: 0;
+    right: 0;
+}
+
+</style> -->
