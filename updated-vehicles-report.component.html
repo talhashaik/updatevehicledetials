@@ -1,0 +1,111 @@
+<div class="section-container pre-kendo mt-4">
+  <div id="template">
+    <div id="temp-box">
+
+      <div class="row">
+        <div class="col-xl-4 col-md-4 form-group">
+          <label title="Branch">Branch</label>
+
+          <ng-select [items]="branchList" bindLabel="pbranchname" bindValue="pbranchname" placeholder="Select"
+            [searchable]="true" [clearable]="false" [(ngModel)]="selectedBranch" (change)="onBranchSelect($event)">
+          </ng-select>
+        </div>
+
+        <div class="col-md-3 col-xl-3 ">
+          <div class="d-flex justify-content-end mt-3 pt-2">
+            <a (click)="generate()" class="btn btn-g-icon mr-4 px-3 border-0">
+              <img src="assets/images/reports-white.svg" width="20" class="mr-3">
+              Generate
+            </a>
+          </div>
+        </div>
+        <!-- <div class="col-xl-12 col-md-12 d-flex  justify-content-end">
+
+          <a aria-controls="hot" aria-selected="false" class="btn btn-b-icon px-3 border-0" data-toggle="tab" role="tab"
+            (click)="generate()">
+            <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading}"></i>
+            <span *ngIf="!isLoading"><img class="mr-3" height="20px" src="assets/images/reports-white.svg"
+                width="20px"></span> Generate Report
+          </a>
+        </div> -->
+        <div class="col-12">
+          <kendo-grid class="center-grid" [kendoGridBinding]="ViewAssetsInvoiceData" [sortable]="true"
+            [pageable]="false" height="500">
+
+            <!-- Toolbar -->
+            <ng-template kendoGridToolbarTemplate>
+              <div class="d-flex justify-content-end w-100 mt-3">
+                <a kendoGridPDFCommand class="mr-3">
+                  <img src="assets/images/pdf-icon-blue.svg" width="22" title="pdf">
+                </a>
+                <a kendoGridExcelCommand>
+                  <img src="assets/images/icon-excel.svg" width="22" title="Excel">
+                </a>
+              </div>
+            </ng-template>
+
+            <!-- GRID COLUMNS (Centered) -->
+            <kendo-grid-column field="pbranchname" title="Branch" width="150" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pinvoice_number" title="Invoice No" width="150"
+              [headerClass]="'text-center align-middle'" [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pvendor_name" title="Vendor" width="150"
+              [headerClass]="'text-center align-middle'" [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pcustodyat" title="Custody" width="140" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="passet_name" title="Asset Name" width="180"
+              [headerClass]="'text-center align-middle'" [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="passet_brand" title="Brand" width="150" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <!-- <kendo-grid-column field="prate" title="Rate" width="120" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column> -->
+
+            <kendo-grid-column field="pvehiclercno" title="RC No" width="150" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pvehicleregno" title="Reg No" width="150"
+              [headerClass]="'text-center align-middle'" [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pchassisno" title="Chassis" width="180" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pengineno" title="Engine" width="180" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pmodelno" title="Model" width="150" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pfueltype" title="Fuel" width="120" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pdepartment" title="Department" width="150"
+              [headerClass]="'text-center align-middle'" [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="plocation" title="Location" width="150" [headerClass]="'text-center align-middle'"
+              [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <kendo-grid-column field="pvehicle_type" title="Vehicle Type" width="160"
+              [headerClass]="'text-center align-middle'" [class]="'text-center align-middle'"></kendo-grid-column>
+
+            <!-- PDF Export -->
+            <kendo-grid-pdf fileName="vehicle_Report.pdf" [repeatHeaders]="true" [allPages]="true" [scale]="0.4"
+              [landscape]="true" paperSize="A3">
+              <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm">
+              </kendo-grid-pdf-margin>
+            </kendo-grid-pdf>
+
+            <kendo-grid-excel fileName="vehicle_Report.xlsx"></kendo-grid-excel>
+
+          </kendo-grid>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
