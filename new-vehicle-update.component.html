@@ -1,0 +1,166 @@
+<div class="container">
+    <form [formGroup]="vehicleform">
+        <!-- (ngSubmit)="saveData()" -->
+        <div class="row">
+            <div class="col-md-4 col-xl-4 ">
+                <div class="form-group">
+                    <label class="form-label ">vehicle no</label>
+                    <ng-select [items]="vehicleNoList" id="documentsType" formControlName="PVehicleNo"
+                        bindLabel="pinvoiceno" bindValue="pinvoiceno" [multiple]=false placeholder="Select"
+                        [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true
+                        (change)="selectvehicleno($event)">
+
+                    </ng-select>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-6">
+                <div class="form-group">
+
+                    <label class="form-label ">Purchased Company</label>
+                    <ng-select [items]="PurchasedCompanyList" bindLabel="purchasedCompany" bindValue="purchasedCompany"
+                        placeholder="Select Company" formControlName="purchasedCompany">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-xl-4 ">
+                <div class="form-group">
+                    <label class="form-label ">vehicle Type</label>
+                    <ng-select [items]="vehicleTypeList" id="pVehicleType" formControlName="pVehicleType"
+                        bindLabel="pVehicleType" bindValue="pVehicleType" [multiple]=false placeholder="Select"
+                        [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true
+                       >
+                        <!--  (change)="selectvehicleType($event)" -->
+                    </ng-select>
+                </div>
+            </div>
+            <!-- <div class="col-md-4 col-xl-4 " *ngif="showvehicleType">
+                <div class="form-group">
+                    <label class="form-label ">vehicle Type</label>
+                    <input type="text" class="form-control" formControlName="pVehicleType">
+
+                </div>
+            </div> -->
+
+            <div class="col-md-4 col-xl-4 ">
+                <div class="form-group">
+                    <label class="form-label ">vehicle Make</label>
+                    <ng-select [items]="vehicleMakeList" id="vehiclemake" formControlName="vehiclemake"
+                        bindLabel="vehiclemake" bindValue="vehiclemake" [multiple]=false placeholder="Select"
+                        [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true
+                        (change)="selectvehicleMake($event)">
+                        <!--  -->
+                    </ng-select>
+                </div>
+            </div>
+            <!-- <div class="col-md-4 col-xl-4 " *ngif="showvehicleMake">
+
+                <div class="form-group">
+                    <label class="form-label ">vehicle Make</label>
+                    <input type="text" class="form-control" formControlName="vehiclemake">
+                </div>
+            </div> -->
+
+            <div class="col-md-4 col-xl-4 ">
+                <div class="form-group">
+                    <label class="form-label ">vehicle variant</label>
+                    <ng-select [items]="vehicleVarientList" id="vehiclevarient" formControlName="vehiclevariant"
+                        bindLabel="vehiclevariant" bindValue="vehiclevariant" [multiple]=false placeholder="Select"
+                        [searchable]=true [clearable]=false dropdownPosition="bottom" [clearOnBackspace]=true>
+                        <!-- (change)="selectvehicleVarient($event)" -->
+                    </ng-select>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-4 col-xl-4 " >
+                <div class="form-group" >
+                    <label class="form-label ">vehicle varient</label>
+                    <input type="text" class="form-control" formControlName="vehiclevarient">
+                </div>
+            </div> -->
+        </div>
+
+        <!-- <div class="col-md-4 col-xl-4 " hidden>
+            <div class="form-group">
+                <label class="form-label ">vehicle used by</label>
+                <input type="vehicleUsedBy" class="form-control" formControlName="vehicleUsedBy">
+            </div>
+        </div> -->
+
+
+        <div class="row">
+
+            <div class="form-group col-md-4">
+                <label id="vchcompanyname" title="Company Name">Used by Company</label>
+                <ng-select [items]="companiesList" bindLabel="vchcompanyname" bindValue="vchcompanyname"
+                    id="vchcompanyname" formControlName="vchcompanyname" placeholder="-- Select Company --"
+                    [multiple]="false" [searchable]="true" [clearable]="false" dropdownPosition="bottom"
+                    (change)="onCompanyChange($event)">
+                </ng-select>
+                <!-- <input type="text" id="pbranch" formControlName="company_name" class="form-control"
+                        placeholder="-- Select Company --" (input)="onCompanyChange($event)"> -->
+            </div>
+
+            <div class="form-group col-md-4">
+                <label id="branchname" title="Branch Name">Branch Name</label>
+                <ng-select [items]="branchesList" bindLabel="branchname" bindValue="branchname" id="branchname"
+                    formControlName="branchname" placeholder="-- Select Branch --" [multiple]="false"
+                    [searchable]="true" [clearable]="false" dropdownPosition="bottom" (change)="onBranchChange($event)">
+                </ng-select>
+            </div>
+
+
+            <div class="form-group col-md-4">
+                <label id="vchcompanyname" title="Company Name">If Sold / Not Working /Office Use </label>
+                <!-- <ng-select [items]="vehicleListstatic" bindLabel="name" bindValue="name"
+                    id="vchcompanyname" formControlName="vehiclesnwof" placeholder="-- Select Company --"
+                    [multiple]="false" [searchable]="true" [clearable]="false" dropdownPosition="bottom"
+                    > -->
+                <!-- (change)="onCompanyChange($event)" -->
+                <!-- </ng-select> -->
+
+                <ng-select [items]="vehicleListstatic" bindLabel="label" bindValue="value"
+                    formControlName="vehiclesnwof" laceholder="-- Select Company --"
+                    [multiple]="false" [searchable]="true" [clearable]="false" dropdownPosition="bottom">
+                </ng-select>
+
+            </div>
+
+            <div class="form-group col-md-4">
+                <label id="pemployeename" title="Employee Name">Used by Name</label>
+                <ng-select [items]="employeesList" bindLabel="pemployeename" bindValue="pemployeename"
+                    id="pemployeename" formControlName="pemployeename" placeholder="-- Select Employee --"
+                    [multiple]="false" [searchable]="true" [clearable]="false" dropdownPosition="bottom">
+                    <!-- (change)="onEmployeeChange($event)" -->
+                </ng-select>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <!-- <button class="btn btn-primary mt-3" type="submit">
+                Save
+            </button> -->
+
+    </form>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-end">
+                <!-- <a (click)="clearDataSave()" class="btn btn-g-icon mr-2 px-3 border-0">
+                        <img src="assets/images/close-filled.svg" width="20px" height="20px" class="mr-1" />Cancel</a> -->
+                <a (click)="saveData()" class="btn btn-g-icon px-3 border-0">
+                    Update</a>
+                <!-- <img src="assets/images/tick.svg" width="20px" height="20px" class="mr-1" /> -->
+
+            </div>
+        </div>
+    </div>
+</div>
